@@ -1,4 +1,3 @@
-// build your `/api/p` router here
 const Task = require('./model')
 const router = require('express').Router()
 
@@ -23,16 +22,12 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     Task.create(req.body)
     .then(p => {
-        // for (i in p) {
-        //     console.log(i)
-        //     console.log(p[i].task_completed)
-            if (p.task_completed == 0) {
-                p.task_completed = false
-                
-            } else {
-                p.task_completed = true
-            }
-        // }
+        if (p.task_completed == 0) {
+            p.task_completed = false
+            
+        } else {
+            p.task_completed = true
+        }
         res.json(p)
     })
     .catch(e => res.status(400).json({message: e.message}))
